@@ -1,0 +1,32 @@
+/* Welcome to FX Batch Compiler !
+ *
+ * This Windows application supports compilation of FX effect files and HLSL
+ * shader files using fxc command line compiler included in DirectX SDK. You can
+ * compile many files at time or one file with different settings.
+ *
+ * This is not Shader IDE, just a font-end for fxc compiler. The document you
+ * can see here is sample compilation script. Its syntax is very simple. Each
+ * line of the script containts command line parameters passed to compiler and
+ * it is called task. File names can be relative to the directory where the
+ * script is saved. For example:
+ */
+
+/T fx_2_0 /Fo SampleEffect_1.fxo SampleEffect.fx /D NO_CULLING=0
+/T fx_2_0 /Fo SampleEffect_2.fxo SampleEffect.fx /D NO_CULLING=1
+
+// You can use singleline and multiline comments here like in C++ and FX files.
+// Single command can span across multiple lines if you finish each line with \
+
+/T vs_3_0 \
+  /E MainVS \
+  /Fo SampleVS.vso \
+  SampleVS.vs
+
+/T ps_3_0 \
+  /E MainPS \
+  /Fo SamplePS.pso \
+  SamplePS.ps
+
+// You can also use comments to hide some tasks temporarily:
+
+// /T fx_2_0 /Fc SampleEffect.txt SampleEffect.fx

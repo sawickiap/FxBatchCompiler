@@ -1,0 +1,10 @@
+struct PS_INPUT
+{
+  float4 Diffuse : COLOR0;
+};
+
+
+void MainPS(PS_INPUT In, out float4 Out : COLOR0)
+{
+  Out = In.Diffuse;
+}

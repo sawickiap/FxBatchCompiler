@@ -9,40 +9,20 @@ namespace FXBC
 {
     public partial class AboutForm : Form
     {
-        private AboutForm()
+        public AboutForm(Icon icon)
         {
             InitializeComponent();
+            icon_picture_box_.Image = icon.ToBitmap();
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void homepage_link_label__LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process P = new System.Diagnostics.Process();
-            P.StartInfo.FileName = "http://regedit.gamedev.pl/";
-            P.StartInfo.UseShellExecute = true;
-            P.Start();
+            Globals.shell_execute(this, "http://www.asawicki.info/");
         }
 
-        private void label5_Click(object sender, EventArgs e)
+        private void email_link_label__LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process P = new System.Diagnostics.Process();
-            P.StartInfo.FileName = "http://www.gamedev.pl/";
-            P.StartInfo.UseShellExecute = true;
-            P.Start();
-        }
-
-        private void linkLabel1_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process P = new System.Diagnostics.Process();
-            P.StartInfo.FileName = "mailto:regedit@regedit.gamedev.pl?subject=FX Batch Compiler";
-            P.StartInfo.UseShellExecute = true;
-            P.Start();
-        }
-
-        // Show modal About dialog
-        public static void Go(IWin32Window Owner)
-        {
-            AboutForm Form = new AboutForm();
-            Form.ShowDialog(Owner);
+            Globals.shell_execute(this, "mailto:adam@asawicki.info?subject=FX Batch Compiler 1.1");
         }
     }
 }

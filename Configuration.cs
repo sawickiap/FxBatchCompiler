@@ -11,11 +11,7 @@ namespace FXBC
         // Dictionary Key => Value
         private static System.Collections.Specialized.StringDictionary m_Data;
 
-        // Return name of configuration file with full path
-        private static string GetFileName()
-        {
-            return Path.Combine(System.Windows.Forms.Application.StartupPath, "Config.dat");
-        }
+        private static string CONFIG_FILE_NAME = "Config.dat";
 
         // Load configuration from file
         // Call at startup.
@@ -23,10 +19,11 @@ namespace FXBC
         {
             m_Data = new System.Collections.Specialized.StringDictionary();
 
-            using (System.IO.StreamReader File = new System.IO.StreamReader(GetFileName()))
+            string config_file_path = Path.Combine(Globals.calc_application_data_dir(), CONFIG_FILE_NAME);
+            using (System.IO.StreamReader file = new System.IO.StreamReader(config_file_path))
             {
                 string Line;
-                while ((Line = File.ReadLine()) != null)
+                while ((Line = file.ReadLine()) != null)
                 {
                     Line = Line.Trim();
                     if (Line.Length == 0)
@@ -34,11 +31,11 @@ namespace FXBC
 
                     int EqPos = Line.IndexOf('=');
                     if (EqPos == -1)
-                        throw new Exception("Error in configuration file: " + GetFileName());
+                        throw new Exception("Error in configuration file: " + config_file_path);
                     string Key = Line.Substring(0, EqPos);
                     string Value = Line.Substring(EqPos + 1);
                     if (Key.Length == 0)
-                        throw new Exception("Error in configuration file: " + GetFileName());
+                        throw new Exception("Error in configuration file: " + config_file_path);
                     m_Data.Add(Key, Value);
                 }
             }
@@ -48,7 +45,8 @@ namespace FXBC
         // Call after configuration change.
         public static void Save()
         {
-            using (System.IO.StreamWriter File = new System.IO.StreamWriter(GetFileName()))
+            string config_file_path = Path.Combine(Globals.calc_application_data_dir(), CONFIG_FILE_NAME);
+            using (System.IO.StreamWriter File = new System.IO.StreamWriter(config_file_path))
             {
                 foreach (System.Collections.DictionaryEntry de in m_Data)
                     File.WriteLine(de.Key + "=" + de.Value);

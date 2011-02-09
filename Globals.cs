@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace FXBC
 {
@@ -9,6 +10,33 @@ namespace FXBC
     {
         // Full application name
         public const string APP_TITLE = "FX Batch Compiler";
+
+        public static string calc_application_data_dir()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), APP_TITLE);
+        }
+
+        public static void prepare_application_data_dir()
+        {
+            string dir = calc_application_data_dir();
+
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+
+                unpack_resource_file(dir, Properties.Resources.Config_dat, "Config.dat");
+                unpack_resource_file(dir, Properties.Resources.Sample_fxbc, "Sample.fxbc");
+                unpack_resource_file(dir, Properties.Resources.SampleEffect_fx, "SampleEffect.fx");
+                unpack_resource_file(dir, Properties.Resources.SampleVS_vs, "SampleVS.vs");
+                unpack_resource_file(dir, Properties.Resources.SamplePS_ps, "SamplePS.ps");
+            }
+        }
+
+        private static void unpack_resource_file(string dir, byte[] bytes, string file_name)
+        {
+            string path = Path.Combine(dir, file_name);
+            File.WriteAllBytes(path, bytes);
+        }
 
         // Convert file size in bytes to string
         public static string SizeToStr(long Size)
@@ -81,5 +109,20 @@ namespace FXBC
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);                      
         public const int EM_LINEINDEX = 0xBB;
         public const int EM_LINEFROMCHAR = 0xC9;
+
+        public static void shell_execute(IWin32Window error_parent, string path)
+        {
+            try
+            {
+                System.Diagnostics.Process P = new System.Diagnostics.Process();
+                P.StartInfo.UseShellExecute = true;
+                P.StartInfo.FileName = path;
+                P.Start();
+            }
+            catch (Exception ex)
+            {
+                ShowError(error_parent, ex);
+            }
+        }
     }
 }

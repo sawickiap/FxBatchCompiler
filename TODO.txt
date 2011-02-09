@@ -1,8 +1,15 @@
+[v] Program configuration and samples are now places in users Application Data
+directory, not in the program directory.
+
 [v] Source code: Project converted to Visual C# 2010.
 
-- Okienko About zmieniæ - bez tych logo, mój nowy adres WWW.
+[v] Fixed bugs in example shaders.
 
-- Oczywiœcie nowy numer wersji i data.
+[v] New About window :)
+
+[v] License changes to GNU GPL version 3.
+
+[v] Program now uses .NET Framework 4.
 
 - Uruchamianie fxc i przechwytywanie wyjœcia zrobiæ z u¿yciem mojego nowego kodu opracowanego w pracy.
 
@@ -12,11 +19,11 @@
 
 - Help / Fxc Parameters poprawiæ, bo teraz fxc wymaga parametru /?
 
-- Help / Documentation poprawiæ, bo mi pokazuje ¿e System cound not find the path specified.
-	Czy¿by u¿ywa³o katalogu bie¿¹cego, który jest zmieniany przez OpenFileDialog ?
+At the end:
 
-- Licencja: GNU GPL v3
+- Oczywiœcie nowy numer wersji i data.
 
-- Config.dat - write into user directory, not program files
+- Update documentation PDF
 
 [?] make installer ?
+

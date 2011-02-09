@@ -57,6 +57,7 @@ namespace FXBC
             m_CmdLineArgs = CmdLineArgs;
             m_Font = ScriptTextbox.Font;
 
+            Globals.prepare_application_data_dir();
             LoadConfig();
 
             // New, empty document
@@ -254,7 +255,8 @@ namespace FXBC
         // Help > About
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutForm.Go(this);
+            AboutForm f = new AboutForm(Icon);
+            f.ShowDialog(this);
         }
 
         // Settings > Locate Fxc
@@ -285,7 +287,8 @@ namespace FXBC
                 Configuration.Save();
 
                 // Load sample script
-                OpenDocument(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Sample.fxbc"));
+                string sample_path = Path.Combine(Globals.calc_application_data_dir(), "Sample.fxbc");
+                OpenDocument(sample_path);
             }
 
             // Command line argument
@@ -1037,17 +1040,7 @@ namespace FXBC
         // Help > Documentation
         private void DocumentationMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                System.Diagnostics.Process P = new System.Diagnostics.Process();
-                P.StartInfo.UseShellExecute = true;
-                P.StartInfo.FileName = "FXBC Documentation.pdf";
-                P.Start();
-            }
-            catch (Exception Err)
-            {
-                Globals.ShowError(this, Err);
-            }
+            Globals.shell_execute(this, Path.Combine(Application.StartupPath, "FXBC Documentation.pdf"));
         }
     }
 

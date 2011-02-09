@@ -59,5 +59,40 @@ namespace FXBC.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static byte[] Config_dat {
+            get {
+                object obj = ResourceManager.GetObject("Config_dat", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] Sample_fxbc {
+            get {
+                object obj = ResourceManager.GetObject("Sample_fxbc", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] SampleEffect_fx {
+            get {
+                object obj = ResourceManager.GetObject("SampleEffect_fx", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] SamplePS_ps {
+            get {
+                object obj = ResourceManager.GetObject("SamplePS_ps", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] SampleVS_vs {
+            get {
+                object obj = ResourceManager.GetObject("SampleVS_vs", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
