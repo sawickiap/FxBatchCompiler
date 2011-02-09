@@ -66,7 +66,7 @@ namespace FXBC
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(248, 23);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Version 1.0    March 2007";
+            this.label2.Text = "Version 1.1    February 2011";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // homepage_link_label_

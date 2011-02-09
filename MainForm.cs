@@ -278,9 +278,11 @@ namespace FXBC
             // First run
             if (Configuration.GetString("first_run") == "1")
             {
+                Cursor = Cursors.WaitCursor;
+
                 // Locate fxc compiler
                 string FxcFile = LocateFxcForm.TryLocateFxc();
-                if (FxcFile != null && FxcFile.Length > 0)
+                if (FxcFile != null)
                     Configuration.SetString("fxc_location", FxcFile);
 
                 Configuration.SetString("first_run", "0");
@@ -289,6 +291,8 @@ namespace FXBC
                 // Load sample script
                 string sample_path = Path.Combine(Globals.calc_application_data_dir(), "Sample.fxbc");
                 OpenDocument(sample_path);
+
+                Cursor = Cursors.Default;
             }
 
             // Command line argument
@@ -988,47 +992,59 @@ namespace FXBC
         // There is working threads pool and each one takes net tasks on loop and executes them.
         private void CompilationThreadProc(Object Obj)
         {
-            System.Diagnostics.Debug.WriteLine("Thread started.");
+            //System.Diagnostics.Debug.WriteLine("Thread started.");
 
             CompilationData Data = (CompilationData)Obj;
 
             string FxcPath, DocumentDirectory;
             Data.GetMainData(out FxcPath, out DocumentDirectory);
 
+            //Random rand = new Random();
             while (!Data.IsAborting())
             {
                 string Parameters;
                 int TaskIndex = Data.StartNextTask(out Parameters);
-                System.Diagnostics.Debug.WriteLine(string.Format("Thread obtained task index {0}", TaskIndex));
+                //System.Diagnostics.Debug.WriteLine(string.Format("Thread obtained task index {0}", TaskIndex));
                 if (TaskIndex == -1) break;
 
                 // Go!
                 string Output;
-                //Thread.Sleep(new Random().Next(100));
-                /*if (Fxc.Run(out Output, FxcPath, Parameters, DocumentDirectory))
+                //Thread.Sleep(rand.Next(100));
+                ConsoleCommand cmd = new ConsoleCommand();
+                bool succeeded;
+                try
+                {
+                    int timeout = 60000;
+                    cmd.Execute(FxcPath, Parameters, DocumentDirectory, timeout, null);
+                    succeeded = cmd.ExitCode == 0;
+                    Output = cmd.StandardErrorData + cmd.StandardOutputData;
+                }
+                catch (Exception ex)
+                {
+                    Output = ex.Message + "\r\n\r\n" + cmd.StandardErrorData + cmd.StandardOutputData;
+                    succeeded = false;
+                }
+
+                if (succeeded)
                 {
                     // Analyze output
                     Regex ErrorsReg = new Regex(@"\(\d+\)\:\serror\s");
                     Regex WarningsReg = new Regex(@"\(\d+\)\:\swarning\s");
-                    Regex FailedReg = new Regex(@"^compilation failed");
 
                     MatchCollection ErrorsMatches = ErrorsReg.Matches(Output);
                     MatchCollection WarningsMatches = WarningsReg.Matches(Output);
-                    Match FailedMatch = FailedReg.Match(Output);
 
-                    bool Failed = (FailedMatch.Success || ErrorsMatches.Count > 0);
-
-                    Data.TaskFinished(TaskIndex, Output, !Failed, ErrorsMatches.Count, WarningsMatches.Count);
+                    Data.TaskFinished(TaskIndex, Output, succeeded, ErrorsMatches.Count, WarningsMatches.Count);
                 }
                 // Executing compiler failed
                 else
-                    Data.TaskFinished(TaskIndex, Output, false, 0, 0);*/
+                    Data.TaskFinished(TaskIndex, Output, false, 0, 0);
                 
-                System.Diagnostics.Debug.WriteLine(string.Format("Thread finished task index {0}", TaskIndex));
+                //System.Diagnostics.Debug.WriteLine(string.Format("Thread finished task index {0}", TaskIndex));
             }
 
             Data.OnThreadExit();
-            System.Diagnostics.Debug.WriteLine("Thread finished.");
+            //System.Diagnostics.Debug.WriteLine("Thread finished.");
         }
 
         private void TaskBuildMenuItem_Click(object sender, EventArgs e)

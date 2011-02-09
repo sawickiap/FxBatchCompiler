@@ -13,18 +13,17 @@ directory, not in the program directory.
 
 [v] Help / Fxc Parameters poprawiæ, bo teraz fxc wymaga parametru /?
 
-- Uruchamianie fxc i przechwytywanie wyjœcia zrobiæ z u¿yciem mojego nowego kodu opracowanego w pracy.
+[v] New code for executing fxc compiler and capturing its output.
 
-- Sprawdzanie czy kompilacja succeeded czy failed poprawiæ, bo bywa Ÿle.
+[v] Sprawdzanie czy kompilacja succeeded czy failed poprawiæ, bo bywa Ÿle.
 
-- Sprawdzanie czy plik jes up-to-date czy wymaga rekompilacji poprawiæ, bo bywa Ÿle.
-
-- Is any more conventional way to find if DX SDK is already installed and what
-path is it in?
+[v] Program now tries to automatically locate fxc.exe compiler bo looking at the
+registry (for key like "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\DirectX\Microsoft
+DirectX SDK (June 2010)"), on failture falls back to searching disk.
 
 At the end:
 
-- Oczywiœcie nowy numer wersji i data.
+[v] Oczywiœcie nowy numer wersji i data.
 
 - Update documentation PDF
 
