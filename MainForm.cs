@@ -326,12 +326,23 @@ namespace FXBC
             string FxcPath;
             if (EnsureFxcPath(out FxcPath))
             {
-                string Output;
-                Cursor.Current = Cursors.WaitCursor;
-                Fxc.Run(out Output, FxcPath, null, null);
-                Cursor.Current = Cursors.Default;
+                try
+                {
+                    Cursor.Current = Cursors.WaitCursor;
 
-                ShowTextForm.Go(this, "Fxc Parameters", Output, m_Font);
+                    ConsoleCommand cmd = new ConsoleCommand();
+                    int timeout = 3000;
+                    cmd.Execute(FxcPath, "/?", null, timeout, null);
+                    
+                    Cursor.Current = Cursors.Default;
+
+                    ShowTextForm.Go(this, "Fxc Parameters", cmd.StandardOutputData, m_Font);
+                }
+                catch (Exception ex)
+                {
+                    Cursor.Current = Cursors.Default;
+                    Globals.ShowError(this, ex);
+                }
             }
         }
 
@@ -994,7 +1005,7 @@ namespace FXBC
                 // Go!
                 string Output;
                 //Thread.Sleep(new Random().Next(100));
-                if (Fxc.Run(out Output, FxcPath, Parameters, DocumentDirectory))
+                /*if (Fxc.Run(out Output, FxcPath, Parameters, DocumentDirectory))
                 {
                     // Analyze output
                     Regex ErrorsReg = new Regex(@"\(\d+\)\:\serror\s");
@@ -1011,7 +1022,7 @@ namespace FXBC
                 }
                 // Executing compiler failed
                 else
-                    Data.TaskFinished(TaskIndex, Output, false, 0, 0);
+                    Data.TaskFinished(TaskIndex, Output, false, 0, 0);*/
                 
                 System.Diagnostics.Debug.WriteLine(string.Format("Thread finished task index {0}", TaskIndex));
             }

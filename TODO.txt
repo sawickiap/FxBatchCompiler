@@ -11,13 +11,16 @@ directory, not in the program directory.
 
 [v] Program now uses .NET Framework 4.
 
+[v] Help / Fxc Parameters poprawiæ, bo teraz fxc wymaga parametru /?
+
 - Uruchamianie fxc i przechwytywanie wyjœcia zrobiæ z u¿yciem mojego nowego kodu opracowanego w pracy.
 
 - Sprawdzanie czy kompilacja succeeded czy failed poprawiæ, bo bywa Ÿle.
 
 - Sprawdzanie czy plik jes up-to-date czy wymaga rekompilacji poprawiæ, bo bywa Ÿle.
 
-- Help / Fxc Parameters poprawiæ, bo teraz fxc wymaga parametru /?
+- Is any more conventional way to find if DX SDK is already installed and what
+path is it in?
 
 At the end:
 

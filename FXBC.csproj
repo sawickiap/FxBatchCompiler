@@ -64,8 +64,8 @@
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Configuration.cs" />
+    <Compile Include="ConsoleCommand.cs" />
     <Compile Include="Document.cs" />
-    <Compile Include="Fxc.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
