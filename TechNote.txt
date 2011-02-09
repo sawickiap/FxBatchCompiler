@@ -1,0 +1,54 @@
+FXC Parameters
+========================================
+
+standalone parameters:
+/Od
+/Op
+/Vd
+/Zi
+/Zpr
+/Zpc
+/Gpp
+/Gfa
+/Gfp
+/Vi
+/Cc
+/nologo
+
+parameters with ignored argument:
+/T ...
+/E ...
+/I ...
+/D ...
+/Vn ...
+
+parameters with argument containing destination file:
+/Fo ... (bin)
+/Fc ... (txt)
+/Fx ... (txt)
+/Fh ... (txt)
+/P ... (txt)
+
+Argument not starting with '/' is input file name.
+
+
+FXC Output
+========================================
+
+/Fo - succeeded - line begins with:
+  compilation succeeded; see 
+/Fo - failed - line begins with:
+  compilation failed; 
+/Fo - error - line begins with:
+  <file-name>(<line-number>): 
+  <file-name>(<line-number>): error <code>: 
+/Fo - warning - line begins with:
+  <file-name>(<line-number>): warning <code>: 
+
+Fc, Fx, Fh - output same as Fo
+
+/P - failed - sample error line begins with:
+  cannot preprocess to file and compile at the same time
+/P - succeeded - no output, only logo
+/P - failed - error message:
+  <file_path>(<line-number>): error <code>: 

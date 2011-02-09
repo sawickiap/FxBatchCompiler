@@ -1,0 +1,22 @@
+[v] Source code: Project converted to Visual C# 2010.
+
+- Okienko About zmieniæ - bez tych logo, mój nowy adres WWW.
+
+- Oczywiœcie nowy numer wersji i data.
+
+- Uruchamianie fxc i przechwytywanie wyjœcia zrobiæ z u¿yciem mojego nowego kodu opracowanego w pracy.
+
+- Sprawdzanie czy kompilacja succeeded czy failed poprawiæ, bo bywa Ÿle.
+
+- Sprawdzanie czy plik jes up-to-date czy wymaga rekompilacji poprawiæ, bo bywa Ÿle.
+
+- Help / Fxc Parameters poprawiæ, bo teraz fxc wymaga parametru /?
+
+- Help / Documentation poprawiæ, bo mi pokazuje ¿e System cound not find the path specified.
+	Czy¿by u¿ywa³o katalogu bie¿¹cego, który jest zmieniany przez OpenFileDialog ?
+
+- Licencja: GNU GPL v3
+
+- Config.dat - write into user directory, not program files
+
+[?] make installer ?
