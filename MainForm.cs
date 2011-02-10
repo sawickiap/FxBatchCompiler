@@ -1025,20 +1025,14 @@ namespace FXBC
                     succeeded = false;
                 }
 
-                if (succeeded)
-                {
-                    // Analyze output
-                    Regex ErrorsReg = new Regex(@"\(\d+\)\:\serror\s");
-                    Regex WarningsReg = new Regex(@"\(\d+\)\:\swarning\s");
+                // Analyze output
+                Regex ErrorsReg = new Regex(@"\(.+\)\:\serror\s");
+                Regex WarningsReg = new Regex(@"\(.+\)\:\swarning\s");
 
-                    MatchCollection ErrorsMatches = ErrorsReg.Matches(Output);
-                    MatchCollection WarningsMatches = WarningsReg.Matches(Output);
+                MatchCollection ErrorsMatches = ErrorsReg.Matches(Output);
+                MatchCollection WarningsMatches = WarningsReg.Matches(Output);
 
-                    Data.TaskFinished(TaskIndex, Output, succeeded, ErrorsMatches.Count, WarningsMatches.Count);
-                }
-                // Executing compiler failed
-                else
-                    Data.TaskFinished(TaskIndex, Output, false, 0, 0);
+                Data.TaskFinished(TaskIndex, Output, succeeded, ErrorsMatches.Count, WarningsMatches.Count);
                 
                 //System.Diagnostics.Debug.WriteLine(string.Format("Thread finished task index {0}", TaskIndex));
             }
