@@ -11,6 +11,10 @@ You can compile many files at time or one file with different settings.
 * Review success or failure, warning and error count and compiler output for every task.
 * Compile single HLSL source file with different parameters and preprocessor macros.
 
+## Download
+
+[Release - Version 1.1](../../releases/tag/1.1)
+
 ## Screenshots
 
 ![Screenshot 1](/Screenshots/Screenshot1.png)
